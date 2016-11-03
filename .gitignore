@@ -87,3 +87,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+env.sh
+dockerrun.aws.json
+db.sqlite3
+media

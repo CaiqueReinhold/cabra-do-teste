@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta_tags %}
+<meta property="fb:app_id" content="321342751577427">
+<meta property="og:title" content="{{answer.test.name}}">
+<meta property="og:type" content="website">
+<meta property="og:description" content="{{answer.option.description}}">
+<meta property="og:url" content="">
+<meta property="og:site_name" content="Cabra do Teste">
+<meta property="og:image" content="{{answer.option.image.url}}">
+{% endblock meta_tags %}
+
+{% block content %}
+<div class="singlepost_area">
+  <div class="singlepost_content">
+    <button class="share btn btn-lg facebook" style="width: 100%"><i class="fa fa-facebook-square"></i> Compartilhe seu resultado no Facebook</button>
+    <h2><a>{% trans 'You got' %} {{answer.option.name}}</a></h2>
+    <img class="img-center" src="{{answer.option.image.url}}" alt="">
+    <h3 style="text-align: center;">{{answer.option.description}}</h3>
+    
+    <div class="social_area wow fadeInLeft">
+      <ul>
+        <li><a class="share" href="#"><span class="fa fa-facebook"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock content %}

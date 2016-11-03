@@ -1,0 +1,124 @@
+{% load i18n %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+  {% block meta_tags %}
+  <meta property="fb:app_id" content="321342751577427">
+  <meta property="og:title" content="Cabra do Teste - Testes para Facebook">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Testes para você e seus amigos se divertirem!">
+  <meta property="og:site_name" content="Cabra do Teste">
+  {% endblock %}
+  
+  <title>{% block title %} {% trans 'Cabra do Teste' %} - {% trans 'Facebook tests' %} {% endblock %}</title>
+  
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/structure.css' %}">
+</head>
+<body>
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<header id="header">
+  <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="{% url 'tests:test_list' %}">
+            <img src="{% static 'imgs/icon2.png' %}">
+            <span>{% trans 'Cabra do Teste' %}</span>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav custom_nav pull-right">
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <form id="searchForm" action="{% url 'tests:test_list' %}" method="GET">
+      <input type="text" placeholder="{% trans 'Search...' %}" name="q">
+      <input type="submit" value="">
+    </form>
+  </div>
+</header>
+<section id="contentbody">
+  <div class="container">
+    <div class="row">
+      <div class=" col-sm-12 col-md-8 col-lg-8">
+        <div class="row">
+          <div class="leftbar_content">
+          {% block content %}{% endblock content %}
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="row">
+          <div class="rightbar_content">
+            <div class="single_blog_sidebar wow fadeInUp">
+              <h2>{% trans 'Popular Tests' %}</h2>
+              <ul class="featured_nav">
+                {% for test in popular_tests %}
+                <li> <a class="featured_img" href="{% url 'tests:test_detail' test.slug %}"><img src="{{test.image.url}}" alt=""></a>
+                  <div class="featured_title"> <a class="" href="{% url 'tests:test_detail' test.slug %}">{{test.name}}</a> </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="footer_inner">
+          <p class="pull-left">Copyright &copy; 2016</p>
+          <p class="pull-right">{% trans 'Developed By' %} <a target="_blank" href="https://twitter.com/caiquereinhold">@caiquereinhold</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="text/html" id="user-template">
+  <li class="dropdown">
+    <a id="user_info" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+      <img src="">
+      <span></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a id="logout" href="#">Logout</a></li>
+    </ul>
+  </li>
+</script>
+<script type="text/html" id="login-template">
+  <li><a id="fb_login" href="#"><i class="fa fa-facebook-square"></i> {% trans 'Login to Facebook' %}</a></li>
+</script>
+<script src="{% static 'js/jquery.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script src="{% static 'js/custom.min.js' %}"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-86779786-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

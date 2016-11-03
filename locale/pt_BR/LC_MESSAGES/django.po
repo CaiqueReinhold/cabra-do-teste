@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-02 23:05+0000\n"
+"PO-Revision-Date: 2016-11-02 HO:MI+ZONE\n"
+"Last-Translator: Caique Reinhold <caiquereinhold@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/base.html:20 templates/base.html:41
+msgid "Cabra do Teste"
+msgstr "Cabra do Teste"
+
+#: templates/base.html:20
+msgid "Facebook tests"
+msgstr "Teste para Facebook"
+
+#: templates/base.html:51
+msgid "Search..."
+msgstr "Pesquisar..."
+
+#: templates/base.html:70
+msgid "Popular Tests"
+msgstr "Testes populares"
+
+#: templates/base.html:91
+msgid "Developed By"
+msgstr "Desenvolvido por"
+
+#: templates/base.html:109
+msgid "Login to Facebook"
+msgstr "Login com Facebook"
+
+#: templates/facetests/test_answer.html:18
+msgid "You got"
+msgstr "Você tirou"
+
+#: templates/facetests/test_detail.html:24
+msgid "Discover your result"
+msgstr "Descubra o seu resultado"
+
+#: templates/facetests/test_detail.html:29
+msgid "Login with Facebook"
+msgstr "Login com Facebook"
+
+#: templates/facetests/test_list.html:5
+msgid "Latest Tests"
+msgstr "Últimos testes"
+
+#: templates/facetests/test_list.html:25
+msgid "There no tests that match your search."
+msgstr "Não há nenhum resultado para a sua busca."

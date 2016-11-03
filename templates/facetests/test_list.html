@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans 'Latest Tests' %}</h2>
+
+{% for test in tests %}
+{% url 'tests:test_detail' test.slug as TEST_URL %}
+<div class="single_stuff wow fadeInDown">
+  <div class="single_stuff_img">
+    <a href="{{TEST_URL}}">
+      <img src="{{test.image.url}}" alt="">
+    </a>
+  </div>
+  <div class="single_stuff_article">
+    <div class="single_sarticle_inner">
+      <div class="stuff_article_inner">
+        <h2><a href="{{TEST_URL}}">{{test.name}}</a></h2>
+        <p>{{test.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% empty %}
+  <h3 class="empty-search">{% trans 'There no tests that match your search.' %}</h3>
+{% endfor %}
+
+{% if page_obj.count > 0 %}
+<div class="stuffpost_paginatinonarea wow slideInLeft">
+  <ul class="newstuff_pagnav">
+    {% if page_obj.number|add:-3 > 0 %}
+      <li><a href="{% url 'tests:test_list' %}?page={{page_obj.number|add:-3}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{page_obj.number|add:-3}}</a></li>
+    {% endif %}
+    {% if page_obj.number|add:-2 > 0 %}
+      <li><a href="{% url 'tests:test_list' %}?page={{page_obj.number|add:-2}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{page_obj.number|add:-2}}</a></li>
+    {% endif %}
+    {% if page_obj.number|add:-1 > 0 %}
+      <li><a href="{% url 'tests:test_list' %}?page={{page_obj.number|add:-1}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{page_obj.number|add:-1}}</a></li>
+    {% endif %}
+    <li><a class="active_page">{{page_obj.number}}</a></li>
+    {% if page_obj.number|add:1 <= page_obj.num_pages %}
+      <li><a href="{% url 'tests:test_list' %}?page={{page_obj.number|add:1}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{page_obj.number|add:1}}</a></li>
+    {% endif %}
+    {% if page_obj.number|add:2 <= page_obj.num_pages %}
+      <li><a href="{% url 'tests:test_list' %}?page={{page_obj.number|add:2}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{page_obj.number|add:2}}</a></li>
+    {% endif %}
+    {% if page_obj.number|add:3 <= page_obj.num_pages %}
+      <li><a href="{% url 'tests:test_list' %}?page={{page_obj.number|add:3}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{page_obj.number|add:3}}</a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+{% endblock content %}

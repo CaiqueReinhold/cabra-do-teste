@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Varela';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Varela'), url(../fonts/Varela-400.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Rampung';
+  src: url('../fonts/Rampung.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
