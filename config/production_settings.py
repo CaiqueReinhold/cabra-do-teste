@@ -23,6 +23,9 @@ DATABASES = {
 AWS_STORAGE_BUCKET_NAME = os.environ['BUCKET_NAME']
 AWS_ACCESS_KEY_ID = os.environ['BUCKET_ACCESS_KEY']
 AWS_SECRET_ACCESS_KEY = os.environ['BUCKET_SECRET_KEY']
+AWS_HEADERS = {
+    'Cache-Control': 'max-age=86400'
+}
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3-sa-east-1.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
@@ -50,6 +53,10 @@ LOGGING = {
             'handlers': ['logfile'],
             'level': 'INFO',
             'propagate': True
+        },
+        'tests_app': {
+            'handlers': ['logfile'],
+            'level': 'INFO'
         }
     },
 }
