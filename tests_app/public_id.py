@@ -1,20 +1,10 @@
-""" Generates and decodes an unique invoice id, which can use characters
+""" Generates and decodes an unique public id, which can use characters
     to shorten its length.
      Author: Will Hardy
        Date: December 2008
       Usage: >>> encode(1)
              "488KR"
-Description: Invoice numbers like "0000004" are unprofessional in that they
-             expose how many sales a system has made, and can be used to monitor
-             the rate of sales over a given time.  They are also harder for
-             customers to read back to you, especially if they are 10 digits
-             long.
-             These functions convert an integer (from eg an ID AutoField) to a
-             short unique string. This is done simply using a perfect hash
-             function and converting the result into a string of user friendly
-             characters.
 """
-import math
 
 # Keep this small for shorter strings, but big enough to avoid changing
 # it later. If you do change it later, it might be a good idea to specify a
@@ -24,21 +14,24 @@ SIZE = 100000000000000
 # OPTIONAL PARAMETERS
 # This just means we don't start with the first number, to mix things up
 OFFSET = SIZE / 2 - 1
-# Alpha numeric characters, only uppercase, no confusing values (eg 1/I,0/O,Z/2)
+# Alpha numeric characters, only uppercase, no confusing values
+# (eg 1/I,0/O,Z/2)
 # Remove some letters if you prefer more numbers in your strings
 # You may wish to remove letters that sound similar, to avoid confusion when a
 # customer calls on the phone (B/P, M/N, 3/C/D/E/G/T/V)
 VALID_CHARS = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # Don't set this if you don't know what you're doing, you run the risk
-# It can be used to mix up the strings differently to how others using this code
-# would, but be careful to pick a factor of SIZE.
+# It can be used to mix up the strings differently to how others using this
+# code would, but be careful to pick a factor of SIZE.
 PERIOD = 16
-# Don't set this, it isn't necessary and you'll get ugly strings like 'AAAAAB3D'
-# It will be otherwise done automatically to match SIZE
+# Don't set this, it isn't necessary and you'll get ugly strings like
+# 'AAAAAB3D'. It will be otherwise done automatically to match SIZE
 STRING_LENGTH = None
 
+
 def perfect_hash(num):
-    """ Translate a number to another unique number, using a perfect hash function.
+    """ Translate a number to another unique number, using a perfect hash
+        function.
         Only meaningful where 0 <= num <= SIZE.
     """
     return int(((num + OFFSET) * (SIZE // PERIOD)) % (SIZE + 1) + 1)
@@ -53,10 +46,11 @@ def friendly_number(num):
     """
     # Convert to a (shorter) string for human consumption
     string = ""
-    # The length of the string can be determined by STRING_LENGTH or by how many
-    # characters are necessary to present a base 30 representation of SIZE.
-    while STRING_LENGTH and len(string) <= STRING_LENGTH \
-                or len(VALID_CHARS) ** len(string) <= SIZE:
+    # The length of the string can be determined by STRING_LENGTH or by how
+    # many characters are necessary to present a base 30 representation of
+    # SIZE.
+    while (STRING_LENGTH and len(string) <= STRING_LENGTH
+            or len(VALID_CHARS) ** len(string) <= SIZE):
         # PREpend string (to remove all obvious signs of order)
         string = VALID_CHARS[num % len(VALID_CHARS)] + string
         num = num // len(VALID_CHARS)
@@ -68,7 +62,9 @@ def encode(num):
         more user friendly string of characters.
     """
     # Check the number is within our working range
-    if num > SIZE: return None
-    if num < 0: return None
+    if num > SIZE:
+        return None
+    if num < 0:
+        return None
 
     return friendly_number(perfect_hash(num))

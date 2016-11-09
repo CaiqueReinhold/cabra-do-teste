@@ -63,7 +63,7 @@ class TestAnswerView(View):
                                  params={
                                     'access_token': access_token,
                                     'fields': 'id,name,gender,email,birthday'
-                                }).json()
+                                 }).json()
         if 'error' in user_data:
             logger.error(
                 'Error on graph api call [{0}]'.format(user_data['error'])

@@ -1,7 +1,5 @@
 from django.db import models
 
-from .public_id import encode
-
 
 class Test(models.Model):
     slug = models.SlugField(db_index=True, unique=True)
