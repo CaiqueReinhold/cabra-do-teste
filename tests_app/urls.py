@@ -9,6 +9,6 @@ urlpatterns = [
         name='test_detail'),
     url(r'^(?P<slug>[-\w]+)/resultado$', views.TestAnswerView.as_view(),
         name='test_answer'),
-    url(r'^(?P<slug>[-\w]+)/(?P<id>[0-9]+)/$', views.TestAnswerView.as_view(),
+    url(r'^(?P<slug>[-\w]+)/(?P<id>[0-9A-Z]+)/$', views.TestAnswerView.as_view(),
         name='view_test_answer')
 ]

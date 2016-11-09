@@ -5,11 +5,5 @@
       "ContainerPort": "8000"
     }
   ],
-  "Volumes": [
-    {
-      "HostDirectory": "/var/log/eb-docker/containers/eb-current-app/",
-      "ContainerDirectory": "/var/log/facetests/"
-    }
-  ],
-  "Logging": "/var/log/eb-docker/containers/eb-current-app/"
+  "Logging": "/var/log/facetests"
 }
