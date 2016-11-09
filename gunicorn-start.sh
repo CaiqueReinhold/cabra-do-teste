@@ -7,15 +7,17 @@ export ACCESS_LOG=/var/log/facetests/gunicorn.access.log
 export ERROR_LOG=/var/log/facetests/gunicorn.error.log
 export DJANGO_LOG=/var/log/facetests/django.log
 export PROJECT_ROOT=/srv/projects/facetests/
-cd $PROJECT_ROOT
-python manage.py migrate --noinput
-python manage.py collectstatic --noinput
+
 if [ ! -d /var/log/facetests ] ; then
     mkdir /var/log/facetests
 fi
 touch $ACCESS_LOG
 touch $ERROR_LOG
 touch $DJANGO_LOG
+
+cd $PROJECT_ROOT
+python manage.py migrate --noinput
+python manage.py collectstatic --noinput
 exec gunicorn ${DJANGO_WSGI_MODULE}:application \
   -b 0.0.0.0:8000 \
   --name $NAME \
