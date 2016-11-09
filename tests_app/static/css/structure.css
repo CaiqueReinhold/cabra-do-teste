@@ -20,7 +20,6 @@ footer a:hover{color: #272727}
 .facebook {background-color: #4865a7; color: white}
 .facebook:hover {color: #ddd}
 .btns {text-align: center}
-.btns button{width: 50%}
 #user_info { padding: 5px 10px }
 #user_info img{height: 40px; border-radius: 3px; border: 1px solid #222; }
 .img-center{display:block; margin-left:auto; margin-right:auto; text-align:center}
@@ -65,7 +64,7 @@ footer a:hover{color: #272727}
 .single_stuff_img a{display:block; -webkit-transition:all 0.5s; -o-transition:all 0.5s; transition:all 0.5s}
 .single_stuff_img img{max-width:100%}
 .single_stuff_article{float:left; display:inline; width:100%; background-color:#fff; border-bottom:1px solid #bebebd; border-left:1px solid #e3e3e3; border-right:1px solid #bebebd}
-.single_sarticle_inner{background-color:#fff; display:inline; float:left; margin:-60px 20px 0; padding:10px 20px; width:auto}
+.single_sarticle_inner{background-color:#fff; display:inline; float:left; margin:-40px 20px 0; padding:10px 20px; width:calc(100% - 40px)}
 .stuff_category{color:#444; display:inline-block; font-size:10px; outline:medium none; text-decoration:none; text-transform:uppercase}
 .stuff_article_inner{float:left; display:inline; width:100%}
 .stuff_date{background-color:#0099cc; border-radius:3px; color:#fff; float:left; font-size:14px; margin:10px 15px 0 0; padding:5px 8px; text-align:center; width:56px}

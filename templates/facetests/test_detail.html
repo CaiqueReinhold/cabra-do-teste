@@ -6,7 +6,7 @@
 <meta property="og:title" content="{{test.name}}">
 <meta property="og:type" content="website">
 <meta property="og:description" content="{{test.description}}">
-<meta property="og:url" content="">
+<meta property="og:url" content="{% url 'tests:test_detail' test.slug %}">
 <meta property="og:site_name" content="Cabra do Teste">
 <meta property="og:image" content="{{test.image.url}}">
 {% endblock meta_tags %}
@@ -16,7 +16,7 @@
   <div class="singlepost_content">
     <h2><a>{{test.name}}</a></h2>
     <img class="img-center" src="{{test.image.url}}" alt="">
-    <p>{{test.description}}</p>
+    <h3 style="text-align: center;">{{test.description}}</h3>
 
     <div class="btns">
         <form id="do_test_form" action="{% url 'tests:test_answer' test.slug %}" method="POST" class="hide">
@@ -24,6 +24,7 @@
           <button href="#" class="btn blue_btn btn-lg"><i class="fa fa-question-circle"></i> {% trans 'Discover your result' %}</button>
         </form>
     </div>
+  </div>
 </div>
 <script type="text/html" id="btn-template">
     <button href="#" class="btn btn-lg facebook"><i class="fa fa-facebook-square"></i> {% trans 'Login with Facebook' %}</button>

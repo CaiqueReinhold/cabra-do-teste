@@ -6,7 +6,7 @@
 <meta property="og:title" content="{{answer.test.name}}">
 <meta property="og:type" content="website">
 <meta property="og:description" content="{{answer.option.description}}">
-<meta property="og:url" content="">
+<meta property="og:url" content="{% url 'tests:view_test_answer' answer.test.slug answer.user.id %}">
 <meta property="og:site_name" content="Cabra do Teste">
 <meta property="og:image" content="{{answer.option.image.url}}">
 {% endblock meta_tags %}
@@ -15,7 +15,7 @@
 <div class="singlepost_area">
   <div class="singlepost_content">
     <button class="share btn btn-lg facebook" style="width: 100%"><i class="fa fa-facebook-square"></i> Compartilhe seu resultado no Facebook</button>
-    <h2><a>{% trans 'You got' %} {{answer.option.name}}</a></h2>
+    <h2 style="text-align: center; margin-top: 15px;"><a>{% trans 'You got' %} {{answer.option.name}}</a></h2>
     <img class="img-center" src="{{answer.option.image.url}}" alt="">
     <h3 style="text-align: center;">{{answer.option.description}}</h3>
     
