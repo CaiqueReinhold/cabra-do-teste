@@ -1,5 +1,7 @@
 from django.db import models
 
+from .public_id import encode
+
 
 class Test(models.Model):
     slug = models.SlugField(db_index=True, unique=True)
@@ -25,6 +27,7 @@ class FacebookUser(models.Model):
 
 
 class TestAnswer(models.Model):
+    public_id = models.CharField(max_length=10, unique=True, db_index=True)
     user = models.ForeignKey(FacebookUser)
     test = models.ForeignKey(Test)
     option = models.ForeignKey(Option)

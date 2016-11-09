@@ -1,12 +1,17 @@
+import logging
 from random import randint
 
 import requests
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
 from .models import Test, TestAnswer, FacebookUser
+from . import public_id
+
+logger = logging.getLogger(__name__)
 
 
 class TestListView(ListView):
@@ -34,7 +39,13 @@ class TestDetailView(DetailView):
 class TestAnswerView(View):
 
     def get(self, request, slug, id):
-        answer = TestAnswer.objects.get(user__id=id, test__slug=slug)
+        try:
+            answer = TestAnswer.objects.get(public_id=id)
+        except TestAnswer.DoesNotExist:
+            logger.info('404 on answer view with id="{id}" and slug="{slug}"'
+                        .format(slug=slug, id=id))
+            raise Http404
+
         return render(request, 'facetests/test_answer.html',
                       {'answer': answer})
 
@@ -43,13 +54,22 @@ class TestAnswerView(View):
 
         access_token = request.POST.get('token')
         if not access_token:
+            logger.warning('post to answer with no access token')
             return redirect('test:test_detail', args=(slug,))
+
+        logger.info('post to answer with token="{0}"'.format(access_token))
 
         user_data = requests.get('https://graph.facebook.com/v2.8/me',
                                  params={
                                     'access_token': access_token,
                                     'fields': 'id,name,gender,email,birthday'
                                 }).json()
+        if 'error' in user_data:
+            logger.error(
+                'Error on graph api call [{0}]'.format(user_data['error'])
+            )
+            return redirect('tests:test_detail', slug)
+
         user = FacebookUser(
             id=user_data['id'],
             name=user_data['name'],
@@ -64,12 +84,10 @@ class TestAnswerView(View):
 
         user.save()
 
-        try:
-            answer = TestAnswer.objects.get(user__id=user.id, test__slug=slug)
-        except TestAnswer.DoesNotExist:
-            answer = TestAnswer(user=user, test=test)
-
-        answer.option=test.options.all()[randint(0, test.options.count()-1)]
+        answer = TestAnswer(user=user, test=test)
+        answer.option = test.options.all()[randint(0, test.options.count()-1)]
+        answer.save()
+        answer.public_id = public_id.encode(answer.id)
         answer.save()
 
-        return redirect('tests:view_test_answer', slug, user.id)
+        return redirect('tests:view_test_answer', slug, answer.public_id)
